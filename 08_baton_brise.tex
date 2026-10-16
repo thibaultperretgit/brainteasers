@@ -1,0 +1,58 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{8}{Le bâton brisé}
+
+\begin{statementbox}
+On prend un bâton de longueur $1$ et on choisit indépendamment deux points de
+coupe, uniformément sur le bâton. On obtient trois morceaux.
+
+Quelle est la probabilité que ces trois morceaux puissent former un triangle
+non dégénéré?
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Noter les positions des coupes $X$ et $Y$, puis supposer d'abord
+  $0<X<Y<1$.
+  \item Quelles sont les longueurs des trois morceaux?
+  \item Lorsque trois longueurs positives ont une somme égale à $1$, à quelle
+  condition forment-elles un triangle?
+  \item Traduire cette condition en trois inégalités sur $x$ et $y$.
+  \item Représenter la région favorable dans le triangle $0<x<y<1$ et
+  comparer les aires.
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Dans le cas $0<x<y<1$, les longueurs sont
+\[
+x,\qquad y-x,\qquad1-y.
+\]
+Leur somme vaut $1$. Elles forment un triangle non dégénéré si et seulement si
+chacune est strictement inférieure à $1/2$. On obtient
+\[
+x<\frac12,
+\qquad y>\frac12,
+\qquad y-x<\frac12.
+\]
+
+Dans le triangle $0<x<y<1$, ces inégalités délimitent un triangle d'aire
+$1/8$. Le domaine conditionnel $0<x<y<1$ a pour aire $1/2$. Ainsi,
+\[
+\Pp(\text{triangle}\mid X<Y)
+=\frac{1/8}{1/2}=\frac14.
+\]
+
+Le cas $Y<X$ est symétrique. On peut aussi multiplier l'aire favorable $1/8$
+par deux et la comparer à l'aire $1$ du carré $[0,1]^2$.
+
+\begin{resultbox}
+\[
+\boxed{\Pp(\text{les trois morceaux forment un triangle})=\frac14.}
+\]
+\end{resultbox}
+
+\end{document}

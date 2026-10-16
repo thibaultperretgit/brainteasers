@@ -1,0 +1,68 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{9}{Les deux urnes}
+
+\begin{statementbox}
+On dispose de $50$ boules rouges et $50$ boules bleues. Il faut répartir les
+$100$ boules entre deux urnes, avec au moins une boule dans chaque urne.
+
+On choisit ensuite une urne uniformément au hasard, puis une boule uniformément
+dans cette urne. Comment répartir les boules pour maximiser la probabilité de
+tirer une boule rouge? Quelle est la probabilité optimale?
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Tester une stratégie extrême: isoler une seule boule rouge.
+  \item Si l'urne 1 contient $r$ rouges et $b$ bleues, écrire la probabilité
+  de succès en fonction de $r$ et $b$.
+  \item Pour $r$ fixé, étudier la dépendance en $b$. Pourquoi le maximum est-il
+  atteint à une extrémité?
+  \item Après avoir placé toutes les boules bleues dans une même urne, combien
+  de rouges faut-il placer seules dans l'autre?
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Si l'urne 1 contient $r$ boules rouges et $b$ boules bleues, la probabilité
+de tirer une rouge vaut
+\[
+P(r,b)=\frac12\left(
+\frac r{r+b}+\frac{50-r}{100-r-b}
+\right).
+\]
+
+Pour $r$ fixé, cette expression est convexe en $b$ sur son domaine. Son
+maximum est donc atteint à une extrémité: il est optimal de ne pas partager
+les boules bleues entre les deux urnes. À permutation près, mettons toutes les
+bleues dans l'urne 2 et seulement $p$ rouges dans l'urne 1. Alors
+\[
+P(p)=\frac12\left(1+\frac{50-p}{100-p}\right).
+\]
+La fraction $(50-p)/(100-p)$ décroît avec $p$. Il faut donc prendre la plus
+petite valeur admissible, $p=1$.
+
+\begin{keyideabox}
+La répartition optimale est
+\[
+\text{urne 1: une rouge},
+\qquad
+\text{urne 2: 49 rouges et 50 bleues}.
+\]
+\end{keyideabox}
+
+La probabilité obtenue est
+\[
+\frac12\cdot1+\frac12\cdot\frac{49}{99}
+=\boxed{\frac{74}{99}\simeq74{,}75\%}.
+\]
+
+\begin{resultbox}
+Isoler une seule boule rouge maximise la probabilité de succès, qui vaut
+$74/99$.
+\end{resultbox}
+
+\end{document}

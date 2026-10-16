@@ -1,0 +1,87 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{7}{La fausse pièce}
+
+\begin{statementbox}
+On possède $12$ pièces visuellement identiques. Une seule est fausse, mais on
+ignore laquelle et si elle est plus lourde ou plus légère que les autres.
+
+Une balance à deux plateaux donne trois résultats: gauche plus lourde,
+équilibre ou droite plus lourde. Identifier avec certitude la fausse pièce et
+déterminer si elle est plus lourde ou plus légère en seulement trois pesées.
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Combien de situations faut-il distinguer? Combien de feuilles un
+  arbre de trois pesées peut-il avoir au maximum?
+  \item Pourquoi une première pesée de trois pièces contre trois crée-t-elle
+  une branche difficile?
+  \item Commencer plutôt par peser quatre pièces contre quatre.
+  \item Si cette pesée est équilibrée, quelles pièces sont innocentes?
+  \item Si elle penche à gauche, quelles sont exactement les huit possibilités
+  encore compatibles avec ce résultat?
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Il existe $12\times2=24$ situations possibles. Trois pesées donnent au plus
+$3^3=27$ suites de résultats: une solution est théoriquement possible.
+Numérotons les pièces de $1$ à $12$.
+
+\subsection*{Première pesée}
+Peser
+\[
+1,2,3,4\quad\text{contre}\quad5,6,7,8.
+\]
+
+\subsection*{Cas 1: équilibre}
+La fausse pièce est parmi $9,10,11,12$, et les pièces $1$ à $8$ sont vraies.
+Peser
+\[
+9,10,11\quad\text{contre}\quad1,2,3.
+\]
+\begin{itemize}
+  \item Équilibre: la pièce $12$ est fausse. La peser contre une vraie pièce
+  indique si elle est lourde ou légère.
+  \item Gauche plus lourde: une des pièces $9,10,11$ est trop lourde. Peser
+  $9$ contre $10$.
+  \item Gauche plus légère: une des pièces $9,10,11$ est trop légère. Peser
+  $9$ contre $10$.
+\end{itemize}
+Dans les deux derniers cas, le déséquilibre désigne la fausse pièce et un
+équilibre désigne la pièce $11$.
+
+\subsection*{Cas 2: le premier plateau est plus lourd}
+Les possibilités sont
+\[
+1_H,2_H,3_H,4_H,5_L,6_L,7_L,8_L,
+\]
+où $H$ signifie «trop lourde» et $L$ «trop légère». Les pièces $9$ à $12$ sont
+authentiques. Peser ensuite
+\[
+1,2,5\quad\text{contre}\quad3,6,9.
+\]
+\begin{itemize}
+  \item \textbf{Gauche plus lourde:} possibilités $1_H,2_H,6_L$. Peser $1$
+  contre $2$. Le plateau plus lourd désigne la fausse; l'équilibre désigne
+  $6_L$.
+  \item \textbf{Droite plus lourde:} possibilités $3_H,5_L$. Peser $3$
+  contre la vraie pièce $9$. Si $3$ est plus lourde, c'est $3_H$; sinon,
+  c'est $5_L$.
+  \item \textbf{Équilibre:} possibilités $4_H,7_L,8_L$. Peser $7$ contre
+  $8$. La plus légère est fausse; l'équilibre désigne $4_H$.
+\end{itemize}
+
+Si la première pesée penche dans l'autre sens, appliquer le raisonnement
+symétrique en échangeant «lourde» et «légère».
+
+\begin{resultbox}
+Cet arbre de décision identifie toujours la pièce et la nature de l'anomalie
+en trois pesées.
+\end{resultbox}
+
+\end{document}

@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{14}{Découpage aléatoire d'un gâteau}
+
+\begin{statementbox}
+On modélise un gâteau par un disque. On effectue $n$ coupes indépendantes.
+Pour chaque coupe, on choisit deux points indépendamment et uniformément sur le
+bord du cercle, puis on trace la corde qui les relie.
+
+Avec probabilité $1$, les extrémités sont distinctes, aucune coupe ne passe par
+l'intersection de deux autres et trois cordes ne se rencontrent pas au même
+point. Déterminer le nombre moyen $E_n$ de morceaux obtenus après $n$ coupes.
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Combien de nouveaux morceaux une corde crée-t-elle si elle coupe $k$
+  cordes précédentes en $k$ points distincts?
+  \item Placer les quatre extrémités de deux cordes sur le cercle. À quelle
+  condition les cordes se croisent-elles à l'intérieur?
+  \item Parmi les trois appariements possibles de quatre points du cercle,
+  combien produisent un croisement?
+  \item Introduire une variable indicatrice pour chaque paire de cordes.
+  \item La linéarité de l'espérance exige-t-elle l'indépendance de ces
+  indicatrices?
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Si une nouvelle corde rencontre $k$ anciennes cordes en $k$ points distincts,
+elle est divisée en $k+1$ segments et crée donc $k+1$ nouveaux morceaux.
+Sous les hypothèses de position générale, le nombre total de régions est
+\[
+R_n=1+n+I_n,
+\]
+où $I_n$ est le nombre total d'intersections entre paires de cordes.
+
+Deux cordes aléatoires ont quatre extrémités uniformes sur le cercle. Une fois
+ces points ordonnés, il existe trois façons de les apparier en deux cordes, et
+une seule relie des extrémités alternées. Ainsi,
+\[
+\Pp(\text{deux cordes se croisent})=\frac13.
+\]
+
+Pour chaque paire $1\leq i<j\leq n$, notons $X_{ij}$ l'indicatrice de son
+croisement. Alors
+\[
+I_n=\sum_{1\leq i<j\leq n}X_{ij}.
+\]
+La linéarité de l'espérance, qui ne demande aucune indépendance, donne
+\[
+\E[I_n]
+=\sum_{i<j}\E[X_{ij}]
+=\binom n2\frac13.
+\]
+
+\begin{resultbox}
+\[
+\boxed{
+E_n=\E[R_n]
+=1+n+\frac13\binom n2
+=1+n+\frac{n(n-1)}6.}
+\]
+Par exemple, $E_1=2$, $E_2=10/3$ et $E_3=5$.
+\end{resultbox}
+
+\end{document}

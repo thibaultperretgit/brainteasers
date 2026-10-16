@@ -1,0 +1,88 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{brainteaser}[2026/10/16 Style des fiches de brainteasers]
+
+\RequirePackage[T1]{fontenc}
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[french]{babel}
+\RequirePackage{lmodern}
+\RequirePackage{microtype}
+\RequirePackage[a4paper,margin=19mm,headheight=15pt,footskip=11mm]{geometry}
+\RequirePackage{amsmath,amssymb,mathtools}
+\RequirePackage{xcolor}
+\RequirePackage{enumitem}
+\RequirePackage[most]{tcolorbox}
+\RequirePackage{fancyhdr}
+\RequirePackage{hyperref}
+
+\definecolor{btNavy}{HTML}{17365D}
+\definecolor{btBlue}{HTML}{EAF2FB}
+\definecolor{btTeal}{HTML}{176B6A}
+\definecolor{btGreen}{HTML}{EAF7F3}
+\definecolor{btGold}{HTML}{9A6A00}
+\definecolor{btYellow}{HTML}{FFF7DD}
+\definecolor{btGray}{HTML}{5D6772}
+\definecolor{btLight}{HTML}{F5F7FA}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=btNavy,
+  urlcolor=btTeal,
+  pdfborder={0 0 0},
+  pdfdisplaydoctitle=true
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt minus .5pt}
+\setlist{leftmargin=1.6em,itemsep=3pt,topsep=3pt}
+\allowdisplaybreaks
+\raggedbottom
+\emergencystretch=2em
+
+\newcommand{\BTTitle}{Brainteaser}
+\newcommand{\BTNumber}{}
+\newcommand{\brainteasertitle}[2]{%
+  \renewcommand{\BTNumber}{#1}%
+  \renewcommand{\BTTitle}{#2}%
+  \hypersetup{pdftitle={Brainteaser #1 - #2},pdfauthor={Fiche d'entraînement},pdfsubject={Brainteaser mathématique}}%
+  \begin{center}
+    {\sffamily\bfseries\color{btTeal}\large FICHE D'ENTRAÎNEMENT\par}
+    \vspace{2mm}
+    {\sffamily\bfseries\color{btNavy}\fontsize{24}{28}\selectfont Brainteaser #1\par}
+    \vspace{1mm}
+    {\sffamily\bfseries\fontsize{17}{21}\selectfont #2\par}
+  \end{center}
+  \vspace{3mm}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{btGray}Brainteaser \BTNumber}
+\fancyhead[R]{\small\color{btGray}\BTTitle}
+\fancyfoot[C]{\small\color{btGray}\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\tcbset{
+  btbase/.style={enhanced,breakable,arc=1.6mm,boxrule=.65pt,
+    left=3mm,right=3mm,top=2.4mm,bottom=2.4mm,before skip=7pt,after skip=7pt,
+    fonttitle=\sffamily\bfseries,coltitle=black},
+  statement/.style={btbase,colback=btBlue,colframe=btNavy,title={Énoncé}},
+  hints/.style={btbase,colback=btYellow,colframe=btGold,title={Indications et questions}},
+  keyidea/.style={btbase,colback=btGreen,colframe=btTeal,title={Idée clé}},
+  result/.style={btbase,colback=btLight,colframe=btNavy,title={Résultat}}
+}
+
+\newenvironment{statementbox}{\begin{tcolorbox}[statement]}{\end{tcolorbox}}
+\newenvironment{hintsbox}{\begin{tcolorbox}[hints]}{\end{tcolorbox}}
+\newenvironment{keyideabox}{\begin{tcolorbox}[keyidea]}{\end{tcolorbox}}
+\newenvironment{resultbox}{\begin{tcolorbox}[result]}{\end{tcolorbox}}
+
+\newcommand{\correction}{%
+  \clearpage
+  \section*{\color{btNavy}Correction}
+  \addcontentsline{toc}{section}{Correction}
+}
+
+\newcommand{\Pp}{\mathbb P}
+\newcommand{\E}{\mathbb E}
+
+\AtBeginDocument{\frenchsetup{StandardLists=true}}

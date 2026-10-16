@@ -1,0 +1,56 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{10}{Deux six consécutifs}
+
+\begin{statementbox}
+On lance un dé équilibré à six faces jusqu'à obtenir deux $6$ consécutifs.
+Quel est le nombre moyen de lancers nécessaires?
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item L'historique complet est-il utile, ou suffit-il de retenir une
+  information sur le dernier lancer?
+  \item Définir $E_0$, l'espérance restante lorsque le dernier lancer n'est
+  pas un $6$, et $E_1$, celle obtenue lorsque le dernier lancer est un $6$.
+  \item Conditionner chaque espérance sur le prochain lancer. Ne pas oublier
+  que ce lancer compte toujours pour $1$.
+  \item Après un échec depuis l'état $E_1$, dans quel état revient-on?
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Depuis l'état $E_0$, un $6$ fait passer dans l'état $E_1$, tandis qu'un autre
+résultat laisse dans $E_0$:
+\[
+E_0=1+\frac16E_1+\frac56E_0.
+\]
+Depuis l'état $E_1$, un nouveau $6$ termine le processus; un autre résultat
+ramène à $E_0$:
+\[
+E_1=1+\frac56E_0.
+\]
+
+La première équation donne $E_0=6+E_1$. En remplaçant $E_1$,
+\[
+E_0=7+\frac56E_0,
+\]
+d'où
+\[
+E_0=42,
+\qquad
+E_1=36.
+\]
+
+Au début, aucun $6$ précédent n'a été obtenu: on part de $E_0$.
+
+\begin{resultbox}
+\[
+\boxed{42\text{ lancers en moyenne}.}
+\]
+\end{resultbox}
+
+\end{document}

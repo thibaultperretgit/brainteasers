@@ -1,0 +1,60 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{13}{Collectionner les faces d'un dé}
+
+\begin{statementbox}
+On lance un dé équilibré à six faces jusqu'à avoir observé au moins une fois
+chacune des six faces. Quel est le nombre moyen de lancers nécessaires?
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Décomposer le processus selon le nombre de faces distinctes déjà vues.
+  \item Si exactement $k$ faces ont été vues, quelle est la probabilité que
+  le prochain lancer donne une nouvelle face?
+  \item Quel est le temps d'attente moyen d'un succès de probabilité $p$?
+  \item Additionner les temps moyens nécessaires pour passer de $k$ à $k+1$
+  faces distinctes.
+  \item Variante: noter $E_k$ l'espérance du nombre de lancers restants
+  lorsque $k$ faces distinctes ont été observées.
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Lorsque $k$ faces distinctes ont déjà été observées, il reste $6-k$ faces
+nouvelles. La probabilité que le prochain lancer en apporte une est
+\[
+p_k=\frac{6-k}{6}.
+\]
+Le temps d'attente moyen d'un succès de probabilité $p_k$ est $1/p_k$, soit
+$6/(6-k)$. Le temps total moyen est donc
+\[
+\begin{aligned}
+E_0
+&=\frac66+\frac65+\frac64+\frac63+\frac62+\frac61\\
+&=6\left(1+\frac12+\frac13+\frac14+\frac15+\frac16\right)\\
+&=\frac{147}{10}.
+\end{aligned}
+\]
+
+La même réponse vient de la récurrence
+\[
+E_k=1+\frac{6-k}{6}E_{k+1}+\frac{k}{6}E_k,
+\qquad E_6=0,
+\]
+qui se réarrange en
+\[
+E_k=E_{k+1}+\frac6{6-k}.
+\]
+
+\begin{resultbox}
+\[
+\boxed{E_0=14{,}7\text{ lancers en moyenne}.}
+\]
+Une espérance peut être non entière: la réponse n'est pas $15$.
+\end{resultbox}
+
+\end{document}

@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{12}{Le pont et la lampe}
+
+\begin{statementbox}
+Quatre personnes doivent traverser un pont de nuit. Elles mettent
+respectivement
+\[
+1,\quad2,\quad7,\quad10
+\]
+minutes pour traverser. Le pont supporte au maximum deux personnes; l'unique
+lampe doit accompagner chaque traversée; et deux personnes avancent à la
+vitesse de la plus lente.
+
+Quel est le temps minimal permettant aux quatre personnes de traverser? Donner
+une stratégie et prouver qu'elle est optimale.
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item La stratégie où la personne de $1$ minute accompagne successivement
+  les trois autres prend combien de temps?
+  \item Comment faire traverser ensemble les personnes de $7$ et $10$ minutes?
+  \item Qui doit rapporter la lampe avant et après leur traversée?
+  \item Pour l'optimalité, séparer les cas où les deux plus lentes traversent
+  ensemble ou séparément.
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Une stratégie en $17$ minutes est
+\[
+\begin{array}{rcl}
+(1,2)&\longrightarrow&2,\\
+1&\longleftarrow&1,\\
+(7,10)&\longrightarrow&10,\\
+2&\longleftarrow&2,\\
+(1,2)&\longrightarrow&2.
+\end{array}
+\]
+Le temps total vaut $2+1+10+2+2=17$.
+
+Montrons qu'on ne peut pas faire mieux.
+
+\subsection*{Les personnes de 7 et 10 minutes traversent séparément}
+Les traversées vers l'arrivée coûtent au moins $10$, $7$ et $2$ minutes. Deux
+retours sont nécessaires et coûtent au moins $1+1$. Le total est donc au moins
+\[
+10+7+2+1+1=21.
+\]
+
+\subsection*{Les personnes de 7 et 10 minutes traversent ensemble}
+Leur traversée coûte $10$. Les deux passages nécessaires des personnes rapides
+vers l'arrivée coûtent au moins $2+2$, et les deux retours nécessaires au
+moins $1+2$. Le total est donc au moins
+\[
+10+4+3=17.
+\]
+
+\begin{resultbox}
+La stratégie construite atteint la borne inférieure:
+\[
+\boxed{17\text{ minutes}.}
+\]
+\end{resultbox}
+
+\end{document}

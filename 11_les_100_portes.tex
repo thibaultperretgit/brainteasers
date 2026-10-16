@@ -1,0 +1,52 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{11}{Les 100 portes}
+
+\begin{statementbox}
+Cent portes sont initialement fermées. On effectue cent passages. Au passage
+$1$, on change l'état de toutes les portes; au passage $2$, celui des portes
+multiples de $2$; et, plus généralement, au passage $k$, l'état de chaque
+porte dont le numéro est divisible par $k$.
+
+Quelles portes sont ouvertes après le centième passage, et combien y en a-t-il?
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Fixer une porte numérotée $n$. À quels passages change-t-elle d'état?
+  \item Quel lien existe-t-il avec le nombre de diviseurs de $n$?
+  \item Pourquoi les diviseurs se regroupent-ils généralement par paires
+  $d\leftrightarrow n/d$?
+  \item Dans quel cas une paire se réduit-elle à un seul entier?
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+La porte $n$ change d'état exactement lors des passages $k$ tels que $k\mid n$.
+Elle est donc basculée $\tau(n)$ fois, où $\tau(n)$ est le nombre de diviseurs
+positifs de $n$. Comme elle commence fermée, elle termine ouverte si et
+seulement si $\tau(n)$ est impair.
+
+Les diviseurs se regroupent par paires
+\[
+d\longleftrightarrow\frac nd.
+\]
+Tous sont appariés, sauf lorsqu'un diviseur vérifie
+\[
+d=\frac nd,
+\]
+c'est-à-dire $d^2=n$. Ainsi, $n$ possède un nombre impair de diviseurs si et
+seulement si $n$ est un carré parfait.
+
+\begin{resultbox}
+Les portes ouvertes sont
+\[
+\boxed{1,4,9,16,25,36,49,64,81,100}.
+\]
+Il y en a $\boxed{10}$.
+\end{resultbox}
+
+\end{document}
