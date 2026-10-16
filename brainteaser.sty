@@ -1,39 +1,37 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{brainteaser}[2026/10/16 Style des fiches de brainteasers]
+\ProvidesPackage{brainteaser}[2026/10/16 Style feuille d'exercices]
 
 \RequirePackage[T1]{fontenc}
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[french]{babel}
 \RequirePackage{lmodern}
 \RequirePackage{microtype}
-\RequirePackage[a4paper,margin=19mm,headheight=15pt,footskip=11mm]{geometry}
+\RequirePackage[a4paper,margin=27mm,headheight=14pt,footskip=10mm]{geometry}
 \RequirePackage{amsmath,amssymb,mathtools}
 \RequirePackage{xcolor}
 \RequirePackage{enumitem}
-\RequirePackage[most]{tcolorbox}
 \RequirePackage{fancyhdr}
 \RequirePackage{hyperref}
 
-\definecolor{btNavy}{HTML}{17365D}
-\definecolor{btBlue}{HTML}{EAF2FB}
-\definecolor{btTeal}{HTML}{176B6A}
-\definecolor{btGreen}{HTML}{EAF7F3}
-\definecolor{btGold}{HTML}{9A6A00}
-\definecolor{btYellow}{HTML}{FFF7DD}
-\definecolor{btGray}{HTML}{5D6772}
-\definecolor{btLight}{HTML}{F5F7FA}
+% Une seule couleur d'accent, proche des annotations d'une feuille de cours.
+\definecolor{btRed}{HTML}{A31E2D}
+\definecolor{btDark}{HTML}{202124}
+\definecolor{btGray}{HTML}{666666}
 
 \hypersetup{
   colorlinks=true,
-  linkcolor=btNavy,
-  urlcolor=btTeal,
+  linkcolor=btRed,
+  urlcolor=btRed,
   pdfborder={0 0 0},
   pdfdisplaydoctitle=true
 }
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{4pt plus 1pt minus .5pt}
-\setlist{leftmargin=1.6em,itemsep=3pt,topsep=3pt}
+\color{btDark}
+\setlength{\parindent}{1.35em}
+\setlength{\parskip}{0pt}
+\setlength{\abovedisplayskip}{8pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{8pt plus 2pt minus 2pt}
+\setlist{leftmargin=1.8em,itemsep=2.5pt,topsep=4pt,parsep=0pt}
 \allowdisplaybreaks
 \raggedbottom
 \emergencystretch=2em
@@ -43,43 +41,74 @@
 \newcommand{\brainteasertitle}[2]{%
   \renewcommand{\BTNumber}{#1}%
   \renewcommand{\BTTitle}{#2}%
-  \hypersetup{pdftitle={Brainteaser #1 - #2},pdfauthor={Fiche d'entraînement},pdfsubject={Brainteaser mathématique}}%
+  \hypersetup{pdftitle={Brainteaser #1 - #2},pdfauthor={Thibault Perret},pdfsubject={Feuille d'exercices}}%
+  \thispagestyle{empty}%
   \begin{center}
-    {\sffamily\bfseries\color{btTeal}\large FICHE D'ENTRAÎNEMENT\par}
-    \vspace{2mm}
-    {\sffamily\bfseries\color{btNavy}\fontsize{24}{28}\selectfont Brainteaser #1\par}
-    \vspace{1mm}
-    {\sffamily\bfseries\fontsize{17}{21}\selectfont #2\par}
+    {\large\scshape Brainteaser #1\par}
+    \vspace{2.5mm}
+    {\LARGE\bfseries #2\par}
   \end{center}
   \vspace{3mm}
+  \noindent\textcolor{btRed}{\rule{\textwidth}{0.55pt}}
+  \vspace{4mm}
 }
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\color{btGray}Brainteaser \BTNumber}
-\fancyhead[R]{\small\color{btGray}\BTTitle}
-\fancyfoot[C]{\small\color{btGray}\thepage}
-\renewcommand{\headrulewidth}{0.3pt}
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0pt}
 
-\tcbset{
-  btbase/.style={enhanced,breakable,arc=1.6mm,boxrule=.65pt,
-    left=3mm,right=3mm,top=2.4mm,bottom=2.4mm,before skip=7pt,after skip=7pt,
-    fonttitle=\sffamily\bfseries,coltitle=black},
-  statement/.style={btbase,colback=btBlue,colframe=btNavy,title={Énoncé}},
-  hints/.style={btbase,colback=btYellow,colframe=btGold,title={Indications et questions}},
-  keyidea/.style={btbase,colback=btGreen,colframe=btTeal,title={Idée clé}},
-  result/.style={btbase,colback=btLight,colframe=btNavy,title={Résultat}}
+\newcommand{\btlabel}[1]{\textcolor{btRed}{\bfseries #1}}
+\newcommand{\important}[1]{\textcolor{btRed}{\bfseries #1}}
+\newcommand{\hypothesis}[1]{%
+  \par\smallskip\noindent\btlabel{Hypothèse.}\enspace\emph{#1}\par\smallskip
 }
 
-\newenvironment{statementbox}{\begin{tcolorbox}[statement]}{\end{tcolorbox}}
-\newenvironment{hintsbox}{\begin{tcolorbox}[hints]}{\end{tcolorbox}}
-\newenvironment{keyideabox}{\begin{tcolorbox}[keyidea]}{\end{tcolorbox}}
-\newenvironment{resultbox}{\begin{tcolorbox}[result]}{\end{tcolorbox}}
+% Les anciens noms d'environnements sont conservés pour ne pas alourdir
+% les fichiers d'exercices, mais ils ne dessinent plus aucune boîte.
+\newenvironment{statementbox}{%
+  \par\addvspace{0.7\baselineskip}%
+  \noindent\btlabel{Énoncé.}\enspace\ignorespaces
+}{%
+  \par\addvspace{0.55\baselineskip}%
+}
+
+\newenvironment{hintsbox}{%
+  \par\addvspace{0.9\baselineskip}%
+  \noindent\btlabel{Indications.}\par\nobreak\smallskip\ignorespaces
+}{%
+  \par\addvspace{0.55\baselineskip}%
+}
+
+\newenvironment{keyideabox}{%
+  \par\addvspace{0.9\baselineskip}%
+  \noindent\btlabel{Idée clé.}\enspace
+  \begingroup\itshape\ignorespaces
+}{%
+  \par\endgroup\addvspace{0.55\baselineskip}%
+}
+
+\newenvironment{resultbox}{%
+  \par\addvspace{1.05\baselineskip}%
+  \noindent\btlabel{Résultat.}\par\nobreak\smallskip
+  \begingroup\bfseries\ignorespaces
+}{%
+  \par\endgroup
+  \noindent\textcolor{btRed}{\rule{0.28\textwidth}{0.45pt}}%
+  \par\addvspace{0.55\baselineskip}%
+}
 
 \newcommand{\correction}{%
   \clearpage
-  \section*{\color{btNavy}Correction}
-  \addcontentsline{toc}{section}{Correction}
+  \thispagestyle{fancy}%
+  \vspace*{3mm}%
+  \begin{center}
+    {\Large\bfseries Correction\par}
+  \end{center}
+  \vspace{1mm}
+  \noindent\textcolor{btRed}{\rule{\textwidth}{0.55pt}}
+  \vspace{4mm}
+  \addcontentsline{toc}{section}{Correction}%
 }
 
 \newcommand{\Pp}{\mathbb P}

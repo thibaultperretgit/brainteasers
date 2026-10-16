@@ -2,24 +2,24 @@
 \usepackage{brainteaser}
 
 \begin{document}
-\brainteasertitle{6}{Les deux œufs}
+\brainteasertitle{6}{Les deux \oe{}ufs}
 
 \begin{statementbox}
 Un immeuble possède $100$ étages. Il existe un étage critique $F$, inconnu,
-tel qu'un œuf lâché d'un étage supérieur à $F$ se casse, tandis qu'un œuf
+tel qu'un \oe{}uf lâché d'un étage supérieur à $F$ se casse, tandis qu'un \oe{}uf
 lâché de l'étage $F$ ou d'un étage inférieur ne se casse pas.
 
-On dispose de deux œufs identiques. Un œuf intact peut être réutilisé. Quel est
+On dispose de deux \oe{}ufs identiques. Un \oe{}uf intact peut être réutilisé. Quel est
 le nombre minimal de lancers nécessaire, dans le pire des cas, pour déterminer
 exactement $F$? Donner la stratégie optimale et une preuve de son optimalité.
 \end{statementbox}
 
 \begin{hintsbox}
 \begin{enumerate}
-  \item Avec un seul œuf, pourquoi faut-il tester les étages un par un?
+  \item Avec un seul \oe{}uf, pourquoi faut-il tester les étages un par un?
   \item Supposer que l'on veut garantir la réponse en $m$ lancers. À quel
   étage peut-on effectuer le premier lancer?
-  \item Si le premier œuf survit, pourquoi le saut suivant doit-il être plus
+  \item Si le premier \oe{}uf survit, pourquoi le saut suivant doit-il être plus
   petit d'une unité?
   \item Combien d'étages peut-on couvrir avec des sauts $m,m-1,\ldots,1$?
   \item Chercher le plus petit entier $m$ tel que
@@ -34,7 +34,7 @@ exactement $F$? Donner la stratégie optimale et une preuve de son optimalité.
 Supposons que l'on veuille garantir la réponse en au plus $m$ lancers. On
 commence à l'étage $m$.
 
-Si l'œuf casse, il reste $m-1$ lancers et un seul œuf pour tester les $m-1$
+Si l'\oe{}uf casse, il reste $m-1$ lancers et un seul \oe{}uf pour tester les $m-1$
 étages inférieurs un par un. S'il ne casse pas, il ne reste que $m-1$ lancers:
 le saut suivant doit être au plus $m-1$, puis $m-2$, etc.
 
@@ -58,7 +58,7 @@ Une stratégie optimale teste successivement les étages
 14,27,39,50,60,69,77,84,90,95,99,100.
 \]
 Les écarts théoriques sont $14,13,12,\ldots$; le dernier est tronqué par la
-borne $100$. Dès que le premier œuf casse, on reprend étage par étage avec le
+borne $100$. Dès que le premier \oe{}uf casse, on reprend étage par étage avec le
 second depuis le dernier étage sûr. Le nombre de lancers déjà utilisés plus le
 nombre maximal de tests restants ne dépasse jamais $14$.
 
