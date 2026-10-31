@@ -1,0 +1,68 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{2}{Suites de pile ou face: jeu de Penney}
+
+\begin{statementbox}
+J1 choisit une suite de trois résultats parmi les huit suites possibles de
+pile ou face. J2 voit ce choix, puis choisit une autre suite de longueur trois.
+
+On lance ensuite une pièce équilibrée jusqu'à ce que l'une des deux suites
+apparaisse dans trois lancers consécutifs. Les fenêtres peuvent se chevaucher.
+J1 choisit $PPP$.
+
+Quelle suite J2 doit-il choisir pour maximiser sa probabilité de gagner, et
+quelle est cette probabilité?
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Chaque motif a probabilité $1/8$ dans un bloc fixé. Cela rend-il les
+  temps de première apparition symétriques?
+  \item Tester le choix $FPP$.
+  \item Considérer la première apparition de $PPP$. Si elle n'a pas lieu aux
+  trois premiers lancers, quel symbole peut précéder ses deux derniers $P$?
+  \item Trouver un événement de probabilité $1/8$ sur lequel J2 est obligé de
+  perdre, quel que soit son choix.
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+J2 choisit
+\[
+\boxed{FPP}.
+\]
+
+Supposons que $PPP$ apparaisse pour la première fois après le troisième
+lancer. Le symbole précédant ses deux derniers $P$ ne peut pas être $P$, sinon
+$PPP$ serait apparue un lancer plus tôt. Il est donc nécessairement $F$, ce
+qui signifie que $FPP$ vient déjà d'apparaître.
+
+J1 ne peut donc gagner que si les trois premiers lancers sont directement
+$PPP$. Cet événement a pour probabilité $1/8$. Par conséquent,
+\[
+\Pp(\text{victoire de J2})=1-\frac18=\boxed{\frac78}.
+\]
+
+Cette valeur est optimale: lorsque les trois premiers lancers sont $PPP$, J1
+gagne avant tout motif différent. Tout choix de J2 perd donc avec probabilité
+au moins $1/8$, et $FPP$ atteint cette borne.
+
+\begin{keyideabox}
+Si J1 choisit le motif $abc$, la meilleure réponse de J2 est
+\[
+\overline b\,a\,b,
+\]
+où $\overline b$ désigne le symbole opposé à $b$. L'automatisme est d'étudier
+les chevauchements entre suffixes et préfixes, pas seulement la probabilité
+d'un bloc isolé.
+\end{keyideabox}
+
+\begin{resultbox}
+Face à $PPP$, le choix optimal est $FPP$ et la probabilité maximale de victoire
+de J2 vaut $7/8$.
+\end{resultbox}
+
+\end{document}

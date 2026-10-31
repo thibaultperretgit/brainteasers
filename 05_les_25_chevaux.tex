@@ -1,0 +1,71 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{5}{Les 25 chevaux}
+
+\begin{statementbox}
+On dispose de $25$ chevaux et de $5$ pistes. Une course peut donc opposer au
+maximum $5$ chevaux. Il n'y a pas de chronomètre: après chaque course, on
+connaît seulement l'ordre d'arrivée. Chaque cheval court toujours à la même
+vitesse et il n'y a pas d'égalité.
+
+Quel est le nombre minimal de courses nécessaire pour identifier avec
+certitude les trois chevaux les plus rapides? Donner une stratégie et prouver
+qu'on ne peut pas faire mieux.
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Former cinq groupes de cinq et ordonner chaque groupe.
+  \item Quels chevaux faut-il faire courir lors de la sixième course?
+  \item Si les vainqueurs sont classés $A_1>B_1>C_1>D_1>E_1$, quels chevaux
+  peuvent encore appartenir au top 3?
+  \item Pourquoi $B_2$ reste-t-il candidat alors que $C_2$ est éliminé?
+  \item Pour la borne inférieure, montrer que cinq courses sont nécessaires
+  pour faire courir tous les chevaux, puis qu'une sixième doit comparer les
+  cinq vainqueurs.
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+On organise cinq premières courses:
+\[
+A_1>A_2>A_3>A_4>A_5,
+\qquad\ldots\qquad,
+E_1>E_2>E_3>E_4>E_5.
+\]
+
+La sixième course oppose les cinq vainqueurs. Supposons qu'elle donne
+\[
+A_1>B_1>C_1>D_1>E_1.
+\]
+Alors $A_1$ est le plus rapide. Les seuls candidats possibles aux places 2 et
+3 sont
+\[
+A_2,\ A_3,\ B_1,\ B_2,\ C_1.
+\]
+
+En effet, $A_4$ a déjà trois chevaux devant lui dans son groupe; $B_3$ est
+battu par $B_1,B_2,A_1$; $C_2$ est battu par $C_1,B_1,A_1$; et tout cheval
+des groupes $D$ et $E$ a au moins trois supérieurs connus.
+
+Une septième course entre les cinq candidats donne directement les deuxième
+et troisième chevaux.
+
+Pour la borne inférieure, tout cheval doit avoir couru au moins une fois,
+sinon un cheval non testé pourrait être le plus rapide. Les cinq premières
+courses doivent donc être cinq groupes disjoints de cinq. Leurs cinq vainqueurs
+sont encore invaincus et incomparables: une sixième course doit les opposer
+pour identifier le plus rapide. Elle ne compare toutefois pas tous les
+candidats restants aux places 2 et 3, par exemple $A_2$ et $B_1$. Une course
+supplémentaire est indispensable.
+
+\begin{resultbox}
+\[
+\boxed{7\text{ courses sont nécessaires et suffisantes}.}
+\]
+\end{resultbox}
+
+\end{document}

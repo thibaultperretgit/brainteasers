@@ -1,0 +1,75 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{1}{Jeu des entiers avec pénalité}
+
+\begin{statementbox}
+Deux joueurs choisissent simultanément un entier $n_1,n_2$ entre $0$ et
+$100$. On retire $10$ au plus grand des deux nombres, puis on compare les
+valeurs obtenues. La plus grande valeur gagne; une égalité vaut $0$.
+
+Le joueur J2 connaît la stratégie aléatoire de J1, mais pas le nombre
+effectivement tiré. Quelle stratégie J1 doit-il adopter pour maximiser sa
+garantie de gain?
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Poser $d=n_1-n_2$. Pour quelles valeurs de $d$ J1 gagne-t-il, perd-il
+  ou fait-il égalité?
+  \item Pourquoi aucun choix déterministe de J1 ne peut-il être optimal?
+  \item Chercher un bloc de nombres sur lequel chaque choix adverse rencontre
+  le même nombre de victoires, de défaites et d'égalités.
+  \item Pourquoi un bloc de longueur $20$ apparaît-il naturellement?
+  \item Pourquoi faut-il placer ce bloc contre la borne supérieure $100$?
+  \item Pour prouver l'optimalité, imaginer que J2 joue uniformément sur ce
+  même bloc.
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+J1 gagne lorsque
+\[
+n_1-n_2\geq 11
+\qquad\text{ou}\qquad
+1\leq n_2-n_1\leq 9.
+\]
+Il perd dans les situations symétriques et fait égalité lorsque les nombres
+sont égaux ou séparés de $10$.
+
+\begin{keyideabox}
+J1 choisit uniformément parmi les vingt nombres
+\[
+S=\{81,82,\ldots,100\}.
+\]
+\end{keyideabox}
+
+Contre un choix fixé $n_2\in S$, les vingt choix possibles de J1 se
+répartissent toujours en
+\[
+9\text{ victoires},\qquad 9\text{ défaites},\qquad 2\text{ égalités}.
+\]
+Ainsi,
+\[
+\Pp(\text{victoire})=\frac9{20},\qquad
+\Pp(\text{défaite})=\frac9{20},\qquad
+\Pp(\text{égalité})=\frac1{10}.
+\]
+
+Si J2 choisit un nombre inférieur à $81$, la probabilité de victoire de J1
+est au moins $1/2$. Le pire cas est donc bien atteint dans $S$.
+
+Pour prouver qu'on ne peut garantir davantage, supposons que J2 joue lui aussi
+uniformément sur $S$. Tout nombre fixe de J1 bat au plus neuf des vingt nombres
+de J2: exactement neuf s'il appartient à $S$, et au plus neuf s'il est
+inférieur à $81$. Une combinaison aléatoire ne peut pas dépasser cette borne.
+
+\begin{resultbox}
+La stratégie minimax est la loi uniforme sur $\{81,\ldots,100\}$. Elle garantit
+$45\%$ de victoires, $45\%$ de défaites et $10\%$ d'égalités. Avec les gains
+$+1,-1,0$, le gain moyen garanti vaut $0$.
+\end{resultbox}
+
+\end{document}

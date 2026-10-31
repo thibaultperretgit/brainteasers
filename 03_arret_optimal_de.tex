@@ -1,0 +1,79 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{3}{Arrêt optimal avec un dé}
+
+\begin{statementbox}
+On part d'un total $S=0$. À chaque étape, on peut s'arrêter et recevoir $S$
+euros, ou relancer un dé équilibré.
+
+Si le dé donne $1$, la partie s'arrête immédiatement et le gain est nul. Si le
+dé donne $2,3,4,5$ ou $6$, le résultat est ajouté à $S$, puis on choisit à
+nouveau entre s'arrêter et continuer.
+
+Déterminer la stratégie optimale, le seuil d'arrêt et le gain moyen optimal en
+partant de $S=0$.
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Définir $V(S)$, la valeur optimale lorsque le total courant vaut $S$.
+  \item Écrire l'équation de Bellman
+  \[
+  V(S)=\max\left(S,\frac16\sum_{k=2}^{6}V(S+k)\right).
+  \]
+  \item Si l'on relance une fois puis s'arrête après un résultat non fatal,
+  quelle espérance obtient-on?
+  \item Au-dessus d'un certain seuil, montrer que le score forme un
+  supermartingale tant que l'on continue.
+  \item Une fois le seuil trouvé, calculer $V(19),V(18),\ldots,V(0)$ à rebours.
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Si l'on relance une fois puis s'arrête après un résultat non fatal, l'espérance
+est
+\[
+\frac16\sum_{k=2}^{6}(S+k)
+=\frac{5S+20}{6}
+=S+\frac{20-S}{6}.
+\]
+Pour $S<20$, cette quantité est strictement supérieure à $S$: continuer au
+moins une fois est préférable à l'arrêt immédiat.
+
+Pour $S\geq20$, le score devient $0$ après un $1$, et $S+k$ après un autre
+résultat. Son espérance au coup suivant est inférieure ou égale à $S$. Après
+un lancer non fatal, le score reste au moins $20$. Le score arrêté est donc un
+supermartingale, et aucune stratégie de continuation ne peut avoir une
+espérance supérieure au gain certain $S$.
+
+\begin{keyideabox}
+La stratégie optimale est
+\[
+\boxed{\text{continuer si }S<20,\qquad\text{s'arrêter si }S\geq20.}
+\]
+À $S=20$, les deux décisions ont la même espérance; s'arrêter évite le risque.
+\end{keyideabox}
+
+Pour calculer la valeur initiale, on pose $V(S)=S$ pour $S\geq20$, puis, pour
+$0\leq S<20$,
+\[
+V(S)=\frac16\sum_{k=2}^{6}V(S+k).
+\]
+Le calcul à rebours donne notamment
+\[
+V(19)=\frac{115}{6},\qquad
+V(18)=\frac{55}{3},\qquad
+V(0)=\frac{492303203}{60466176}.
+\]
+
+\begin{resultbox}
+Le seuil d'arrêt est $20$ et le gain moyen optimal en partant de zéro vaut
+\[
+\boxed{V(0)\simeq 8{,}142\text{ euros}.}
+\]
+\end{resultbox}
+
+\end{document}

@@ -1,0 +1,61 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{4}{Les places dans l'avion}
+
+\begin{statementbox}
+Un avion possède $N$ sièges numérotés de $1$ à $N$, attribués aux passagers
+$1,\ldots,N$. Les passagers montent dans cet ordre.
+
+Le passager 1 a perdu son billet et choisit uniformément un siège. Chaque
+passager suivant s'assoit à sa place si elle est libre; sinon, il choisit
+uniformément parmi les sièges encore libres.
+
+Quelle est la probabilité que le dernier passager trouve son propre siège
+libre?
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Étudier les cas $N=2$ et $N=3$.
+  \item Que se passe-t-il si le premier passager choisit le siège $1$, le
+  siège $N$, ou un siège intermédiaire $k$?
+  \item Après le choix de $k$, quel passager devient le nouveau passager
+  désorienté?
+  \item Peut-on réduire tout le processus à une course entre deux sièges
+  décisifs?
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Le processus reste déterministe jusqu'à ce qu'un passager trouve sa place
+occupée. Celui-ci choisit alors au hasard parmi les sièges libres et reprend le
+rôle du premier passager.
+
+Les seuls sièges décisifs sont:
+\begin{itemize}
+  \item le siège $1$: s'il est choisi en premier, tous les passagers suivants
+  retrouvent leur place et le passager $N$ réussit;
+  \item le siège $N$: s'il est choisi en premier, le passager $N$ échoue.
+\end{itemize}
+
+À chaque choix aléatoire pertinent, ces deux sièges encore libres jouent des
+rôles symétriques. Chacun a donc la même probabilité d'être choisi avant
+l'autre.
+
+On peut aussi formaliser le raisonnement par récurrence. Si $P_N$ désigne la
+probabilité cherchée,
+\[
+P_N=\frac1N\left(1+0+\sum_{k=2}^{N-1}P_{N-k+1}\right),
+\]
+et l'hypothèse $P_m=1/2$ pour les tailles inférieures redonne $P_N=1/2$.
+
+\begin{resultbox}
+\[
+\boxed{\Pp(\text{le passager }N\text{ trouve sa place})=\frac12.}
+\]
+\end{resultbox}
+
+\end{document}
