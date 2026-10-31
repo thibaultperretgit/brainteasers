@@ -1,0 +1,181 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{16}{Motifs dans les décimales}
+
+\begin{statementbox}
+On choisit uniformément un nombre $X$ dans $[0,1]$ et on lit successivement
+les chiffres de son développement décimal:
+\[
+X=0,D_1D_2D_3\ldots
+\]
+
+\begin{enumerate}
+  \item Combien de décimales faut-il lire en moyenne avant de voir apparaître
+  le motif $222$? Généraliser au motif formé de $n$ chiffres $2$
+  consécutifs.
+  \item Combien de décimales faut-il lire en moyenne avant de voir trois
+  chiffres identiques consécutifs, sans imposer leur valeur? Généraliser à
+  une suite de $k$ chiffres identiques quelconques.
+\end{enumerate}
+
+On compte toutes les décimales lues, y compris celles qui terminent le motif.
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Les chiffres $D_i$ sont indépendants et uniformes sur
+  $\{0,1,\ldots,9\}$.
+  \item Pour chercher $n$ chiffres $2$, définir un état $j$ égal au nombre de
+  chiffres $2$ consécutifs observés à la fin de la suite courante.
+  \item Après un chiffre différent de $2$, cet état revient à $0$.
+  \item Pour chercher $k$ chiffres identiques quelconques, mémoriser seulement
+  la longueur de la série courante.
+  \item Dans ce second problème, un chiffre différent du précédent ne ramène
+  pas à un état vide: il commence immédiatement une nouvelle série de
+  longueur $1$.
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+À un ensemble de probabilité nulle près, un nombre uniforme sur $[0,1]$
+possède un développement décimal unique. Ses chiffres $D_1,D_2,\ldots$ sont
+indépendants et chacun prend les dix valeurs $0,1,\ldots,9$ avec probabilité
+$1/10$. Le choix entre les deux écritures des nombres décimaux, par exemple
+$0{,}5000\ldots$ et $0{,}4999\ldots$, ne change donc pas les espérances.
+
+\paragraph{Le motif $222$.}
+Il faut tenir compte des recouvrements possibles du motif. Notons $E_j$ le
+nombre moyen de chiffres supplémentaires à lire lorsque les derniers chiffres
+observés sont exactement $j$ chiffres $2$ consécutifs, avec $0\leq j\leq3$.
+L'état $3$ est absorbant, donc $E_3=0$.
+
+Depuis l'état $0$, le prochain chiffre est un $2$ avec probabilité $1/10$;
+sinon on reste dans l'état $0$. Ainsi,
+\[
+E_0=1+\frac1{10}E_1+\frac9{10}E_0.
+\]
+Depuis les états $1$ et $2$, un nouveau $2$ fait progresser d'un état, tandis
+que tout autre chiffre ramène à l'état $0$:
+\[
+E_j=1+\frac1{10}E_{j+1}+\frac9{10}E_0,
+\qquad j=1,2.
+\]
+La première équation donne $E_0=10+E_1$. En utilisant ensuite les deux autres
+équations et $E_3=0$, on obtient
+\[
+E_0=10+100+1000=1110.
+\]
+
+\begin{resultbox}
+\[
+\boxed{\E[T_{222}]=1110.}
+\]
+Il faut lire en moyenne $1110$ décimales avant la première apparition de
+$222$.
+\end{resultbox}
+
+\paragraph{$n$ chiffres $2$ consécutifs.}
+Conservons les états $0,1,\ldots,n$, avec $E_n=0$. Posons
+\[
+A_j=E_0-E_j.
+\]
+Les mêmes équations donnent $A_0=0$ et
+\[
+A_{j+1}=10(A_j+1),
+\qquad 0\leq j<n.
+\]
+Par récurrence,
+\[
+A_j=10+10^2+\cdots+10^j.
+\]
+Or $A_n=E_0-E_n=E_0$. Par conséquent,
+\[
+\boxed{
+\E[T_{2,n}]
+=10+10^2+\cdots+10^n
+=\frac{10(10^n-1)}9.}
+\]
+Pour $n=1,2,3,4$, les espérances sont respectivement
+$10$, $110$, $1110$ et $11110$.
+
+\paragraph{Trois chiffres identiques quelconques.}
+Cette fois, la valeur du chiffre répété n'est pas fixée. Après avoir lu le
+premier chiffre, une série de longueur $1$ est déjà commencée. Notons $F_j$ le
+nombre moyen de chiffres supplémentaires nécessaires lorsque la série finale
+courante a longueur $j$, avec $1\leq j\leq3$. On a $F_3=0$.
+
+Pour $j=1,2$, le chiffre suivant est identique au précédent avec probabilité
+$1/10$, ce qui prolonge la série. Avec probabilité $9/10$, il est différent:
+la série recherchée échoue, mais ce nouveau chiffre commence aussitôt une
+nouvelle série de longueur $1$. Ainsi,
+\[
+F_j
+=1+\frac1{10}F_{j+1}+\frac9{10}F_1,
+\qquad j=1,2.
+\]
+Ces équations donnent
+\[
+F_1=10+100=110.
+\]
+Il faut ajouter le tout premier chiffre, lu avant d'entrer dans l'état $1$.
+Le nombre moyen total de décimales est donc
+\[
+\boxed{1+F_1=111.}
+\]
+
+\paragraph{$k$ chiffres identiques quelconques.}
+Avec les états $1,2,\ldots,k$, posons
+\[
+B_j=F_1-F_j.
+\]
+On a $B_1=0$ et les équations précédentes donnent
+\[
+B_{j+1}=10(B_j+1),
+\qquad 1\leq j<k.
+\]
+Donc
+\[
+F_1=B_k=10+10^2+\cdots+10^{k-1},
+\]
+car $F_k=0$. En ajoutant le premier chiffre, on trouve
+\[
+\boxed{
+\E[T_k]
+=1+10+10^2+\cdots+10^{k-1}
+=\frac{10^k-1}{9}.}
+\]
+Pour $k=1,2,3,4$, cela donne $1$, $11$, $111$ et $1111$ décimales en
+moyenne.
+
+\paragraph{Comparaison.}
+Chercher $k$ occurrences consécutives d'un chiffre fixé demande en moyenne
+exactement dix fois plus de chiffres que chercher $k$ chiffres identiques de
+valeur quelconque:
+\[
+\frac{10(10^k-1)}9
+=10\,\frac{10^k-1}{9}.
+\]
+
+\paragraph{Dans une base quelconque.}
+En base $b$, les mêmes raisonnements remplacent $10$ par $b$. Pour un chiffre
+fixé répété $n$ fois et pour une valeur quelconque répétée $k$ fois, on obtient
+respectivement
+\[
+\boxed{
+\E[T_{a,n}]=\frac{b(b^n-1)}{b-1},
+\qquad
+\E[T_k]=\frac{b^k-1}{b-1}.}
+\]
+
+\paragraph{Pourquoi pas $1000$ et $100$?}
+Une fenêtre de trois chiffres vaut $222$ avec probabilité $1/1000$, et elle
+est formée de trois chiffres identiques quelconques avec probabilité $1/100$.
+On ne peut toutefois pas inverser directement ces probabilités: deux fenêtres
+successives partagent deux chiffres et ne sont donc pas indépendantes. Les
+états précédents mémorisent précisément l'information conservée d'une fenêtre
+à la suivante.
+
+\end{document}
