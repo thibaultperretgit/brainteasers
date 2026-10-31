@@ -1,0 +1,136 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{17}{Les 100 prisonniers et les boîtes}
+
+\begin{statementbox}
+Cent prisonniers sont numérotés de $1$ à $100$. Dans une salle se trouvent
+$100$ boîtes fermées, elles aussi numérotées de $1$ à $100$. Chacune contient
+le numéro d'un prisonnier, les $100$ numéros étant répartis aléatoirement, un
+par boîte.
+
+Les prisonniers entrent dans la salle un à un. Chacun peut ouvrir au plus
+$50$ boîtes et doit retrouver son propre numéro. Il referme ensuite toutes les
+boîtes exactement comme il les a trouvées. Toute communication est interdite
+dès que l'épreuve commence, mais les prisonniers peuvent convenir auparavant
+d'une stratégie commune.
+
+Ils sont tous libérés si chacun retrouve son numéro. Si un seul échoue, ils
+perdent tous.
+
+Peuvent-ils élaborer une stratégie leur donnant plus de $30\,\%$ de chances
+de réussite collective?
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Généraliser le problème à un nombre pair $n$ de prisonniers, chacun
+  pouvant ouvrir $n/2$ boîtes. Étudier d'abord les cas $n=2$ et $n=4$.
+  \item Pour $n=4$, un prisonnier ouvre d'abord la boîte portant son numéro.
+  S'il y découvre le numéro $j$, quelle boîte peut-il ouvrir ensuite sans
+  recourir au hasard?
+  \item Représenter le contenu des boîtes par une permutation $\sigma$, où
+  $\sigma(i)$ est le numéro placé dans la boîte $i$. Que produit l'itération
+  $i,\sigma(i),\sigma^2(i),\ldots$?
+  \item Relier la réussite d'un prisonnier à la longueur du cycle contenant
+  son numéro.
+  \item Pour $k>n/2$, compter les permutations qui possèdent un cycle de
+  longueur $k$: choisir ses éléments, former le cycle, puis permuter les
+  éléments restants.
+  \item Deux cycles de longueurs strictement supérieures à $n/2$ peuvent-ils
+  appartenir à la même permutation?
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Modélisons le placement par une permutation $\sigma$ de
+$\{1,\ldots,100\}$: la boîte $i$ contient le numéro $\sigma(i)$.
+
+Le prisonnier $i$ applique la stratégie suivante. Il ouvre d'abord la boîte
+$i$. S'il y lit $\sigma(i)$, il ouvre ensuite la boîte $\sigma(i)$, puis la
+boîte $\sigma^2(i)$, et ainsi de suite, jusqu'à trouver $i$ ou atteindre la
+limite de $50$ ouvertures.
+
+\begin{keyideabox}
+Chaque prisonnier suit le cycle de la permutation qui contient son propre
+numéro.
+\end{keyideabox}
+
+Si le cycle contenant $i$ a pour longueur $\ell$, les boîtes ouvertes sont
+successivement
+\[
+i,\ \sigma(i),\ \ldots,\ \sigma^{\ell-1}(i),
+\]
+et la dernière contient
+$\sigma^\ell(i)=i$. Le prisonnier $i$ réussit donc si et seulement si
+$\ell\leq 50$. Par conséquent, les cent prisonniers réussissent tous si et
+seulement si aucun cycle de $\sigma$ n'a une longueur supérieure à $50$.
+
+\subsection*{Les petits cas}
+
+Pour $n=2$, chaque prisonnier ouvre sa propre boîte. Ils réussissent ensemble
+exactement lorsque la permutation est l'identité, soit avec probabilité
+$1/2$.
+
+Pour $n=4$, chacun peut ouvrir deux boîtes. Les types de cycles favorables
+sont
+\[
+1+1+1+1,\qquad 2+1+1,\qquad 2+2.
+\]
+Ils correspondent respectivement à $1$, $6$ et $3$ permutations. La
+probabilité de réussite vaut donc
+\[
+\frac{1+6+3}{4!}=\frac{5}{12}.
+\]
+
+\subsection*{Comptage pour un entier pair $n$}
+
+La stratégie échoue exactement lorsque la permutation contient un cycle de
+longueur $k>n/2$. Pour une valeur fixée de $k$, le nombre de permutations
+contenant un tel cycle est
+\[
+\binom nk (k-1)!(n-k)!=\frac{n!}{k}.
+\]
+En effet, on choisit les $k$ éléments du cycle, on les ordonne cycliquement de
+$(k-1)!$ façons, puis on permute librement les $n-k$ éléments restants.
+
+Une permutation ne peut pas contenir deux cycles de longueurs strictement
+supérieures à $n/2$. Les événements comptés pour les différentes valeurs de
+$k$ sont donc incompatibles. Pour une permutation uniforme,
+\[
+\Pp(\text{échec})
+=\sum_{k=n/2+1}^{n}\frac1k.
+\]
+En notant $H_m=\sum_{k=1}^m 1/k$ le $m$-ième nombre harmonique, on obtient
+\[
+\Pp(\text{réussite})
+=1-\sum_{k=n/2+1}^{n}\frac1k
+=1-H_n+H_{n/2}.
+\]
+
+Pour $n=100$,
+\[
+\Pp(\text{réussite})
+=1-\sum_{k=51}^{100}\frac1k
+=1-H_{100}+H_{50}
+\approx 0{,}3118278.
+\]
+
+\begin{resultbox}
+La stratégie des cycles donne aux cent prisonniers une probabilité de réussite
+collective d'environ
+\[
+\boxed{31{,}18\,\%},
+\]
+contre $2^{-100}$ seulement avec des choix aléatoires indépendants.
+\end{resultbox}
+
+Enfin, comme $H_n-H_{n/2}\to\log 2$, cette probabilité tend, lorsque $n$ pair
+tend vers l'infini, vers
+\[
+1-\log 2\approx 30{,}69\,\%.
+\]
+
+\end{document}
