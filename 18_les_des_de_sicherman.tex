@@ -1,0 +1,150 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{brainteaser}
+
+\begin{document}
+\brainteasertitle{18}{Les dés de Sicherman}
+
+\begin{statementbox}
+On lance deux dés ordinaires équilibrés à six faces, numérotées de $1$ à $6$.
+
+On souhaite les remplacer par deux autres dés équilibrés à six faces. Les
+faces peuvent porter des nombres entiers strictement positifs répétés, mais
+chaque dé doit toujours posséder exactement six faces.
+
+Peut-on numéroter ces deux dés autrement qu'avec
+$1,2,3,4,5,6$, tout en conservant exactement la même distribution des sommes?
+Si oui, déterminer les nombres inscrits sur les faces des deux dés.
+\end{statementbox}
+
+\begin{hintsbox}
+\begin{enumerate}
+  \item Associer à un dé dont les faces sont $d_1,\ldots,d_6$ le polynôme
+  $x^{d_1}+\cdots+x^{d_6}$.
+  \item Que représente le coefficient de $x^s$ dans le produit des
+  polynômes associés aux deux dés?
+  \item Le polynôme d'un dé ordinaire est
+  \[
+  D(x)=x+x^2+\cdots+x^6.
+  \]
+  Factoriser $D(x)$ dans $\mathbb Z[x]$.
+  \item Si $A(x)$ et $B(x)$ représentent les dés recherchés, utiliser
+  $A(x)B(x)=D(x)^2$ et $A(1)=B(1)=6$.
+  \item Parmi les facteurs de $D(x)^2$, lequel peut être réparti différemment
+  entre $A(x)$ et $B(x)$ sans modifier leur valeur en $x=1$?
+\end{enumerate}
+\end{hintsbox}
+
+\correction
+
+Pour un dé, notons $a_k$ le nombre de faces portant l'entier $k$ et
+introduisons le polynôme générateur
+\[
+A(x)=\sum_{k\geq1}a_kx^k.
+\]
+Le coefficient de $x^k$ est donc le nombre de faces portant $k$, et
+$A(1)=6$ puisque le dé possède six faces.
+
+Pour deux dés représentés par $A(x)$ et $B(x)$, le coefficient de $x^s$ dans
+$A(x)B(x)$ vaut
+\[
+\sum_{i+j=s}a_i b_j.
+\]
+Il compte exactement les couples de faces dont la somme est $s$. Les deux dés
+recherchés ont donc la même distribution des sommes que deux dés ordinaires
+si et seulement si
+\[
+A(x)B(x)=D(x)^2,
+\qquad
+D(x)=x+x^2+x^3+x^4+x^5+x^6.
+\]
+
+\subsection*{Factorisation du dé ordinaire}
+
+On factorise
+\[
+\begin{aligned}
+D(x)
+&=x(1+x+x^2+x^3+x^4+x^5)\\
+&=x(x+1)(x^2+x+1)(x^2-x+1).
+\end{aligned}
+\]
+Ainsi,
+\[
+D(x)^2
+=x^2(x+1)^2(x^2+x+1)^2(x^2-x+1)^2.
+\]
+
+Les nombres inscrits étant strictement positifs, $A$ et $B$ sont tous deux
+divisibles par $x$. Comme le coefficient de $x^2$ dans leur produit vaut $1$,
+chacun contient exactement un facteur $x$ et possède exactement une face
+portant le nombre $1$.
+
+Les trois autres facteurs affichés sont irréductibles dans $\mathbb Z[x]$.
+L'unicité de la factorisation impose donc, pour certains exposants
+$\alpha,\beta,\gamma\in\{0,1,2\}$,
+\[
+A(x)=x(x+1)^\alpha(x^2+x+1)^\beta(x^2-x+1)^\gamma,
+\]
+les facteurs complémentaires appartenant à $B(x)$.
+
+Comme $A(1)=6$, on a
+\[
+6=A(1)=2^\alpha3^\beta.
+\]
+La seule possibilité est
+\[
+\alpha=\beta=1.
+\]
+En revanche, $x^2-x+1$ vaut $1$ en $x=1$: son exposant $\gamma$ peut valoir
+$0$, $1$ ou $2$ sans changer le nombre de faces.
+
+\subsection*{Les différentes répartitions}
+
+Si $\gamma=1$, alors
+\[
+A(x)=B(x)=D(x),
+\]
+et l'on retrouve simplement les deux dés ordinaires.
+
+Prenons maintenant $\gamma=0$. Le premier polynôme devient
+\[
+\begin{aligned}
+A(x)
+&=x(x+1)(x^2+x+1)\\
+&=x+2x^2+2x^3+x^4.
+\end{aligned}
+\]
+Le premier dé porte donc les nombres
+\[
+1,\quad2,\quad2,\quad3,\quad3,\quad4.
+\]
+
+Le second reçoit les deux facteurs restants $x^2-x+1$:
+\[
+\begin{aligned}
+B(x)
+&=x(x+1)(x^2+x+1)(x^2-x+1)^2\\
+&=x+x^3+x^4+x^5+x^6+x^8.
+\end{aligned}
+\]
+Ses faces portent donc
+\[
+1,\quad3,\quad4,\quad5,\quad6,\quad8.
+\]
+
+Le cas $\gamma=2$ échange seulement les rôles des deux dés. Il ne fournit pas
+une nouvelle paire.
+
+\begin{resultbox}
+À l'ordre des dés près, l'unique solution non standard en entiers strictement
+positifs est
+\[
+\boxed{(1,2,2,3,3,4)}
+\qquad\text{et}\qquad
+\boxed{(1,3,4,5,6,8)}.
+\]
+Ces deux dés reproduisent exactement la distribution des sommes de deux dés
+ordinaires.
+\end{resultbox}
+
+\end{document}
